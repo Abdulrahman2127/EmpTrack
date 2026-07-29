@@ -1,6 +1,8 @@
 import jwt from "jsonwebtoken";
 
 const authMiddleware = (req, res, next) => {
+  console.log("Cookies:", req.cookies);
+  console.log("Token:", req.cookies.token);
   try {
     const token = req.cookies.token;
 
