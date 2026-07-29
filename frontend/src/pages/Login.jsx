@@ -11,10 +11,14 @@ export default function Login() {
 
   const login = async () => {
     try {
-      const res = await axios.post('http://localhost:3001/api/users/login', {
-        email,
-        password,
-      },{withCredentials:true})
+      const res = await axios.post(
+        `${import.meta.env.VITE_API_URL}/api/users/login`,
+        {
+          email,
+          password,
+        },
+        { withCredentials: true },
+      )
 
       console.log(res.data)
 
@@ -23,9 +27,9 @@ export default function Login() {
 
       navigate('/home')
     } catch (err) {
-      console.log(err);
-      console.log(err.response);
-      console.log(err.response?.data);
+      console.log(err)
+      console.log(err.response)
+      console.log(err.response?.data)
     }
   }
 

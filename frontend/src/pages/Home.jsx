@@ -8,9 +8,12 @@ export default function Home() {
   const navigate = useNavigate()
   const employee = async () => {
     try {
-      const res = await axios.get('http://localhost:3001/api/employees', {
-        withCredentials: true,
-      })
+      const res = await axios.get(
+        `${import.meta.env.VITE_API_URL}/api/employees`,
+        {
+          withCredentials: true,
+        },
+      )
       console.log(res.data)
       setEmployees(res.data)
     } catch (error) {
@@ -23,14 +26,14 @@ export default function Home() {
   const deleteEmp = async (id) => {
     try {
       const res = await axios.delete(
-        `http://localhost:3001/api/employees/${id}`,
+        `${import.meta.env.VITE_API_URL}/api/employees/${id}`,
         {
           withCredentials: true,
         },
       )
-    
+
       console.log(res.data)
-      employee();
+      employee()
     } catch (error) {
       console.log(error)
     }
@@ -39,7 +42,7 @@ export default function Home() {
   const deleteToken = async () => {
     try {
       await axios.post(
-        'http://localhost:3001/api/users/logout',
+        `${import.meta.env.VITE_API_URL}/api/users/logout`,
         {},
         {
           withCredentials: true,
@@ -55,7 +58,7 @@ export default function Home() {
   useEffect(() => {
     employee()
   }, [])
-  
+
   return (
     <div className="home-container">
       <nav className="navbar">

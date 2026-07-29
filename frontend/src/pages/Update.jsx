@@ -18,7 +18,7 @@ export default function Update() {
   const emp = async (id) => {
     try {
       const res = await axios.get(
-        `http://localhost:3001/api/employees/details/${id}`,
+        `${import.meta.env.VITE_API_URL}/api/employees/details/${id}`,
         {
           withCredentials: true,
         },
@@ -38,10 +38,10 @@ export default function Update() {
     }
   }
 
-  const updateEmployee  = async (id) => {
+  const updateEmployee = async (id) => {
     try {
       const res = await axios.put(
-        `http://localhost:3001/api/employees/${id}`,
+        `${import.meta.env.VITE_API_URL}/api/employees/${id}`,
         {
           name,
           email,
@@ -57,7 +57,6 @@ export default function Update() {
       )
       navigate('/home')
       console.log(res.data)
-      
     } catch (error) {
       console.log(error)
     }
@@ -133,7 +132,11 @@ export default function Update() {
           />
 
           <div className="buttons">
-            <button onClick={() => updateEmployee(id)} type="button" className="save-btn">
+            <button
+              onClick={() => updateEmployee(id)}
+              type="button"
+              className="save-btn"
+            >
               Save Changes
             </button>
 

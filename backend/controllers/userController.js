@@ -1,6 +1,7 @@
 import User from '../models/data.js'
 import bcrypt from 'bcrypt'
 import jwt from "jsonwebtoken"; 
+
 export const postUser = async (req, res) => {
   try {
     const { email, name, password } = req.body
@@ -54,7 +55,7 @@ export const postLogin = async (req, res) => {
         message: 'Incorrect password',
       })
     }
-    console.log(process.env.JWT_SECRET);
+    
     const token = jwt.sign(
   {
     id: user._id,
@@ -66,10 +67,12 @@ export const postLogin = async (req, res) => {
   }
 );
 
-res.cookie("token", token, {
-  httpOnly: true,
-  maxAge: 24 * 60 * 60 * 1000,
-});
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+      maxAge: 24 * 60 * 60 * 1000,
+    });
     return res.status(200).json({
       message: 'Login successful',
     })
@@ -80,7 +83,11 @@ res.cookie("token", token, {
 
 
 export const postLogut = (req , res) => {
-  res.clearCookie("token");
+  res.clearCookie("token", {
+  httpOnly: true,
+  secure: process.env.NODE_ENV === "production",
+  sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+});
   res.status(200).json({
   message: "Logout successful",
 });

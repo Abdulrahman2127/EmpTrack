@@ -17,7 +17,7 @@ export default function CreateEmployee() {
   const createEmployee = async () => {
     try {
       const res = await axios.post(
-        'http://localhost:3001/api/employees',
+        `${import.meta.env.VITE_API_URL}/api/employees`,
         {
           name,
           email,

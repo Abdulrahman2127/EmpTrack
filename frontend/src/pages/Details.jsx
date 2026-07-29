@@ -13,7 +13,7 @@ export default function Details() {
   const emp = async (id) => {
     try {
       const res = await axios.get(
-        `http://localhost:3001/api/employees/details/${id}`,
+        `${import.meta.env.VITE_API_URL}/api/employees/details/${id}`,
         {
           withCredentials: true,
         },
@@ -29,7 +29,7 @@ export default function Details() {
   const deleteEmp = async (id) => {
     try {
       const res = await axios.delete(
-        `http://localhost:3001/api/employees/${id}`,
+        `${import.meta.env.VITE_API_URL}/api/employees/${id}`,
         {
           withCredentials: true,
         },
