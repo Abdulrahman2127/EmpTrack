@@ -13,7 +13,7 @@ export default function Login() {
     try {
       console.log(import.meta.env.VITE_API_URL)
       const res = await axios.post(
-        `${import.meta.env.VITE_API_URL}/api/users/login`,
+        "https://emptrack-7bo4.onrender.com/api/users/login",
         {
           email,
           password,
